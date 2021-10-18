@@ -1,88 +1,89 @@
-9.20- 10.8 立项：与导师讨论并理解题目，实验室配置，撰写毕设计划
+9.20 - 10.8 Complete the project outline and plan, discuss the topic and laboratory usage in the project with the supervisor.
 
- 
+10.9 - 10.17 Object Detection background research:
 
-10.9-10.31：进行关于目标检测相关的背景调查研究
+(1) Basic background research about the general deep learning field on its significance, current application, bottleneck, and future development. 
 
-（1）深度学习背景调查，意义及目前应用，未来发展，瓶颈
+(2) Background research on object detection and related tasks: classification, location, instance segmentation, and read relevant papers. 
 
-（2）进行图像识别相关研究调查， 目标识别（分类），目标检测（分类+位置）查看Andrew Ng视频、paper
+(3) Research on object detection algorithms, for instance, Yolov5, Faster R-CNN (refer to R-CNN, Fast R-CNN as the basis), and SSD, then summarize the advantages and disadvantages of each algorithm. 
 
-（3）目标检测算法调研： yolov5, Faster-RCNN(RCNN, Fast-RCNN作为基础)，SGD, 比较优劣=>选择 yolo
+(4) Investigate web front-end back-end technology, Python Flask backend framework, and Vue front-end framework. 
 
-（4）调研网页前后端技术：Flask(原因：python平台在Pytorch作为深度学习框架中方便实现) + Vue 及其原因
+(5) Research on object detection dataset, compare VOC, COCO, ImageNet, and select one data set for training. 
 
-（5）数据集调研： VOC2007 比较+确定
+(6) Investigate basic indicators and benchmarks related to object detection, read relevant papers, and acquainted with the process for subsequent model evaluation. 
 
-（6）Benchmark 指标 Evaluation paper（VOC2007）
+10.18 - 10.25 Prepare for the Thesis Proposal Defense:
 
+ (1) Write the Thesis Proposal Report.
 
+ (2) Prepare the Thesis Proposal Defense slide.
 
-11.1-11.30：项目结构、技术选择确定， 开发环境搭建
+ (3) Prepare the Thesis Proposal Defense presentation.
 
-前后端 深度学习框架 算法确定（Vue + Flask + Pytorch + Yolov5）
+10.25 - 11.30 Determine the project structure and technology stack, built the development environment, and complete the basic demo: 
 
-Anaconda 深度学习开发环境搭建
+ (1) The basic construction of front and back end modules and deep learning framework (technology stack: Vue + Flask + Pytorch + Yolov5)
 
-模型选择：s m x l
+ (2) Build Anaconda deep learning development environment and install related dependent libraries. 
 
-数据集转换代码：  VOC2007
+ (3) Implement data set format conversion code.
 
-demo演示（基于预模型）：图片+视频+camera
+ (4) Complete the demo based on the pre-training model, test the object detection accuracy of pictures, videos, and cameras. 
 
+12.1 - 12.31 Start training on multiple pre-training weights:
 
+ (1) Record loss, AP, recall, and other important indicators of each training. 
 
-12.1-12.31
+ (2) Visualize the training results and record the continuous trend of loss, AP and Recall. 
 
-开始训练（10个epoch一组）
+ (3) Record the processing speed of each image predicted by the model.
 
-s:
+ (4) Evaluate the training results, use test sets to evaluate the training results, and formulate improvement plans according to the situation. 
 
-m:
+ (5) Initial the setup of the front-end page(using Node.js and Vue framework). 
 
-l:
+ (6) Write Project Outline and Plan.
 
-x:
+1.1 - 1.31 Continue the remaining development tasks:
 
-绘图 + evaluation + 速度测定 + 选择
+ (1) Develop and beautify the web page, add status hints and other information to improve user experience. 
 
-前端页面搭建 （node.js + Vue）
+ (2) Complete the interface for accessing web pages at the back end, including uploading and downloading pictures. 
 
-中期报告准备
+ (3) Complete the deep learning Yolo-v5 image object detection module and encapsulate the image object detection processing interface. 
 
+2.1 - 2.28 Continue remaining development tasks and paper writing:
 
+ (1) Complete the front-end upload and download displaying layer for object detection based on the video. 
 
-1.1-1.31
+ (2) Implement a back-end interface to complete video detection. 
 
-前后端开发
+ (3) Complete the deep learning Yolo-v5 object detection module based on video and encapsulate the object detection based on the video processing interface.
 
-深度学习封装（图片）
+ (4) Design charts based on previous work (training and test samples, comparison with benchmark) 
 
-图片的检测完成
+ (5) Begin to write the abstract, introduction, and literature review of the paper. 
 
+3.1 - 3.15 Continue to write the paper and prepare for the mid-term examination:
 
+ (1) Continue to write the research method, experimental process, and conclusion part of the paper. 
 
-2.1-2.28
+ (2) Prepare the slide for mid-term examination and defense. 
 
-视频检测后端接口
+ (3) Prepare demo of mid-term examination project. 
 
-前端展示
+3.16 - 3.31 Roughly complete the paper writing
 
-深度学习接口封装（视频检测）
+ (1) Complete writing the final parts: evaluation and citation of the paper.
 
+ (2) Polish and modify the language and structure of the paper. 
 
+4.1 - 4.20 Prepare for Thesis Defense 
 
-3.1-3.30
+ (1) Prepare slide for Thesis Defense.
 
-论文写作 + reference
+ (2) Prepare for the Thesis Defense presentation.
 
-
-
-4.1-4.31
-
-答辩准备
-
-
-
-
-
+ (3) Consider the advantages and disadvantages of the project, and prepare incoming questions in the defense. 
