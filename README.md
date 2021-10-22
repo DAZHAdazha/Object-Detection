@@ -18,21 +18,15 @@ At present, the mainstream object detection algorithms are mainly based on a dee
 
 The main performance indicator of the object detection model is the accuracy and processing speed, and the accuracy mainly considers the positioning and classification accuracy of the object. In general, the two-stage algorithm has advantages in accuracy, while the one-stage algorithm has advantages in processing speed. 
 
-(1) SSD stands for Single Shot MultiBox Detector, is a single-stage, multiple proposal object detection algorithm, SSD use CNN network to detect with multi-scale feature map, the basic structure like the figure below:
-
-![img](file:///C:\Users\75834\AppData\Local\Temp\ksohtml\wps4335.tmp.png) 
+(1) SSD stands for Single Shot MultiBox Detector, is a single-stage, multiple proposal object detection algorithm, SSD use CNN network to detect with multi-scale feature map.
 
 Additionally, SSD adopts VGG16 as the basic model, and then adds a convolution layer based on VGG16 to obtain more feature maps for detection. 
 
-(2) Faster R-CNN, after the evolvement of R-CNN and Fast R-CNN, Ross B. Girshick proposed Faster R-CNN in 2016. In terms of structure, the Faster R-CNN integrated feature extraction, bounding box regression (rect refine), and classification into one network, which greatly improves the overall performance, especially in the detection speed, the structure of the network is listed below: 
-
-![img](file:///C:\Users\75834\AppData\Local\Temp\ksohtml\wps4336.tmp.png) 
+(2) Faster R-CNN, after the evolvement of R-CNN and Fast R-CNN, Ross B. Girshick proposed Faster R-CNN in 2016. In terms of structure, the Faster R-CNN integrated feature extraction, bounding box regression (rect refine), and classification into one network, which greatly improves the overall performance, especially in the detection speed.
 
  
 
-Yolo, stands for You Only Look Once, which adopts a separate CNN model to achieve end-to-end object detection. The whole system is shown in the figure below: the input image is resized and sent to the CNN network, then the detected object results are obtained by processing network prediction. Compared with the R-CNN algorithm, it is a unified framework with faster speed while the training process of Yolo is also end-to-end. 
-
-![img](file:///C:\Users\75834\AppData\Local\Temp\ksohtml\wps4337.tmp.png) 
+Yolo, stands for You Only Look Once, which adopts a separate CNN model to achieve end-to-end object detection. The input image is resized and sent to the CNN network, then the detected object results are obtained by processing network prediction. Compared with the R-CNN algorithm, it is a unified framework with faster speed while the training process of Yolo is also end-to-end. 
 
  
 
