@@ -1,5 +1,5 @@
 # Result Preview (demo)
-![images](https://github.com/DAZHAdazha/Final-Project/tree/main/images/demo.png)
+![images](https://github.com/DAZHAdazha/Object-Detection/tree/main/images/demo.png)
 # 1.Objectives & Significance
 
 Object detection has always been of great significance in the field of computer vision whose main objective is to enable the computer to accurately classify the objects in a given picture or video and find the position of each object. In recent years, many computer vision researchers at home and abroad have developed a large number of excellent object detection neural network algorithms, including Faster R-CNN, SSD, YOLO. The goal of this project is to select appropriate object detection algorithms and data sets and train the deep learning model, then develop a website for users which allows users to complete object detection tasks easily.  
