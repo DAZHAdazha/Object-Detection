@@ -40,11 +40,20 @@ def allowed_file(filename):
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
 
+@app.route('/model', methods=['POST'])
+def choose_model():
+    for i in request.form.keys():
+        print(i)
+        current_app.model.changeModel(str(i))
+    return "ok"
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     file = request.files['file']
     print(datetime.datetime.now(), file.filename)
+
+    current_app.model.currentModel()
+
     if file and allowed_file(file.filename):
         src_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(src_path)

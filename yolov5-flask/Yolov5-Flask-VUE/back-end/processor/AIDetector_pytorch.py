@@ -16,8 +16,25 @@ class Detector(object):
         self.init_model()
 
     def init_model(self):
+        self.weights = 'weights/yolov5m.pt'
+        self.device = '0' if torch.cuda.is_available() else 'cpu'
+        self.device = select_device(self.device)
+        model = attempt_load(self.weights, map_location=self.device)
+        model.to(self.device).eval()
+        model.half()
+        # torch.save(model, 'test.pt')
+        self.m = model
+        self.names = model.module.names if hasattr(
+            model, 'module') else model.names
+        self.colors = [
+            (randint(0, 255), randint(0, 255), randint(0, 255)) for _ in self.names
+        ]
 
-        self.weights = 'weights/final.pt'
+    def currentModel(self):
+        print(self.weights)
+
+    def changeModel(self, mymodel):
+        self.weights = 'weights/yolov5'+mymodel +'.pt'
         self.device = '0' if torch.cuda.is_available() else 'cpu'
         self.device = select_device(self.device)
         model = attempt_load(self.weights, map_location=self.device)

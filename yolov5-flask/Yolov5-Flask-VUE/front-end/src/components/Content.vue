@@ -12,8 +12,24 @@
       <el-progress :percentage="percentage"></el-progress>
       <span slot="footer" class="dialog-footer">Please wait...</span>
     </el-dialog>
+                <div>
+                        <el-dropdown @command="handleCommand">
+                  <span class="el-dropdown-link">
+                    Choose model<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="s">yolov5s</el-dropdown-item>
+                    <el-dropdown-item command="m">yolov5m</el-dropdown-item>
+                    <el-dropdown-item command="l">yolov5l</el-dropdown-item>
+                    <el-dropdown-item command="x">yolov5x</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+                </div>
+
 
     <div id="CT">
+
+
       <div id="CT_image">
         <el-card
           id="CT_image_1"
@@ -25,6 +41,10 @@
             margin-bottom: -30px;
           "
         >
+
+
+
+
           <div class="demo-image__preview1">
             <div
               v-loading="loading"
@@ -59,6 +79,8 @@
                 </div>
               </el-image>
             </div>
+
+
             <div class="img_info_1" style="border-radius: 0 0 5px 5px">
               <span style="color: white; letter-spacing: 0px">Raw image</span>
             </div>
@@ -185,6 +207,14 @@ export default {
     document.title = "YOLOv5 Object Detection WEB";
   },
   methods: {
+   handleCommand(command) {
+
+        axios
+        .post(this.server_url + "/model", command)
+        .then((response) => {
+            this.$message('Model yolov5' + command + ' is chosen.');
+        });
+      },
     true_upload() {
       this.$refs.upload.click();
     },
@@ -284,6 +314,14 @@ export default {
 .el-button {
   padding: 12px 20px !important;
 }
+
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
 
 #hello p {
   font-size: 15px !important;
