@@ -40,6 +40,11 @@ def allowed_file(filename):
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
 
+@app.route('/loginPage')
+def loginPage():
+    print("jjj")
+    return "j"
+
 @app.route('/model', methods=['POST'])
 def choose_model():
     for i in request.form.keys():

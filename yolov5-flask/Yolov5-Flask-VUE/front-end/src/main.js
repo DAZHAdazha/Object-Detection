@@ -2,10 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import Login from './Login'
+import Index from './Index'
 import VueRouter from 'vue-router'
 import axios from 'axios'
 import Element from 'element-ui'
 import echarts from "echarts";
+import 'jquery'
 
 Vue.prototype.$echarts = echarts;
 import '../node_modules/element-ui/lib/theme-chalk/index.css'
@@ -19,7 +22,15 @@ Vue.prototype.$http = axios
 
 const router = new VueRouter({
     routes: [
-        {path: "/App", component: App, meta: {title: "眼疾辅助诊断系统"},},
+        {path: "/App", component: App, meta: {title: "Object Detection Yolov5"},},
+        {
+            path: '/login',
+            component: Login
+         },
+         {
+            path: '/',
+            component: Index
+         },
     ],
     mode: "history"
 })

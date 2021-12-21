@@ -12,10 +12,11 @@
       <el-progress :percentage="percentage"></el-progress>
       <span slot="footer" class="dialog-footer">Please wait...</span>
     </el-dialog>
-                <div>
+
+                <div style="background-color:#e1e8ee">
                         <el-dropdown @command="handleCommand">
-                  <span class="el-dropdown-link">
-                    Choose model<i class="el-icon-arrow-down el-icon--right"></i>
+                  <span class="el-dropdown-link link" style="color:#21B3B9; font-size:18px;font-weight: bold" >
+                    Select model<i class="el-icon-arrow-down el-icon--right"></i>
                   </span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="s">yolov5s</el-dropdown-item>
@@ -26,8 +27,7 @@
                 </el-dropdown>
                 </div>
 
-
-    <div id="CT">
+    <div id="CT" style="background-color:#e1e8ee">
 
 
       <div id="CT_image">
@@ -41,9 +41,6 @@
             margin-bottom: -30px;
           "
         >
-
-
-
 
           <div class="demo-image__preview1">
             <div
@@ -310,7 +307,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-button {
   padding: 12px 20px !important;
 }
@@ -558,6 +555,16 @@ div {
   margin-top: 10px;
   margin-right: -30px;
 }
+
+.link{
+transition: all .2s ease-in-out;
+}
+.link:hover
+{
+transform: scale(1.1);
+color: #ff7c0b!important;
+}
+
 </style>
 
 

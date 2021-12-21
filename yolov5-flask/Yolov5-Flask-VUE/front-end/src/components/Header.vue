@@ -9,6 +9,16 @@
         <!-- <i class="el-icon-search" style="font-size: 23px"></i> -->
         2018110239
       </span>
+
+    <router-link to="/login">
+
+      <a id="login" >
+      <span class="link" style="color:#21B3B9; font-weight: bold; float:right">
+         Log in/Sign up
+      </span>
+      </a>
+      </router-link>
+
     </div>
     <div id="word">
       <h1>{{ msg }}</h1>
@@ -16,6 +26,7 @@
   </div>
 </template>
 <script>
+
 export default {
   name: "Header",
   data() {
@@ -24,8 +35,9 @@ export default {
       activeIndex: "1",
     };
   },
-  methods: {},
-};
+  methods: {
+  },
+ }
 </script>
 <style scoped>
 #Header {
@@ -80,6 +92,15 @@ i {
   line-height: 24px;
   margin-right: 40px;
 }
+.link{
+transition: all .2s ease-in-out;
+}
+.link:hover
+{
+transform: scale(1.1);
+color: #ff7c0b!important;
+}
+
 </style>
 
 
