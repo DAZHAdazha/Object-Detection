@@ -4,32 +4,30 @@
   </div>
 </template>
 <script>
-export default {
-  name: "Footer",
-  data() {
-    return {
-      msg: "",
-    };
-  },
-};
+  export default {
+    name: "Footer",
+    data() {
+      return {
+        msg: "",
+      };
+    },
+  };
 </script>
 <style scoped>
-#Footer {
-  /*background:#F2F6FC;*/
-  padding: 6px;
-  border-radius: 5px;
-  width: 80%;
-  height: 80px;
-  margin: 20px auto;
-  margin-top: 140px;
-}
+  #Footer {
+    /*background:#F2F6FC;*/
+    padding: 6px;
+    border-radius: 5px;
+    width: 80%;
+    height: 80px;
+    margin: 20px auto;
+    margin-top: 140px;
+  }
 
-p {
-  color: #ff7c0b;
-  text-align: center;
-  margin: 30px auto;
-  font-size: 1.1em;
-}
+  p {
+    color: #ff7c0b;
+    text-align: center;
+    margin: 30px auto;
+    font-size: 1.1em;
+  }
 </style>
-
-
