@@ -16,7 +16,7 @@
                 <div style="background-color:#e1e8ee">
                         <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link link" style="color:#21B3B9; font-size:18px;font-weight: bold" >
-                    Select model<i class="el-icon-arrow-down el-icon--right"></i>
+                    Select weight<i class="el-icon-arrow-down el-icon--right"></i>
                   </span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="s">yolov5s</el-dropdown-item>
@@ -111,7 +111,7 @@
           <div slot="header" class="clearfix">
             <span style="color:#ff7c0b; font-weight:bold">Object Detection</span>
             <el-button
-              style="margin-left: 35px"
+              style="margin-left: 250px"
               v-show="!showbutton"
               type="primary"
               icon="el-icon-upload"
@@ -296,7 +296,7 @@ export default {
       this.$notify({
         title: "Detect Successfully",
         message: "Click image to enlarge",
-        duration: 0,
+        duration: 2000,
         type: "success",
       });
     },
