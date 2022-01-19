@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import Login from './Login'
+import Search from './Search'
 import Index from './Index'
 import VueRouter from 'vue-router'
 import axios from 'axios'
@@ -26,6 +27,10 @@ const router = new VueRouter({
         {
             path: '/login',
             component: Login
+         },
+         {
+            path: '/search',
+            component: Search
          },
          {
             path: '/',

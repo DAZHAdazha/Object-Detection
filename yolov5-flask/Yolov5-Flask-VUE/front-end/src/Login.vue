@@ -11,20 +11,20 @@
     <div class="signup">
       <h2 style="margin-left:-35px" class="form-title" @click="myfunSignup" id="signup"><span>Or</span>Sign up</h2>
       <div class="form-holder">
-        <input type="text" class="input" placeholder="Username" />
-        <input type="email" class="input" placeholder="Email" />
-        <input type="password" class="input" placeholder="Password" />
+        <input id="signupUsername" type="text" class="input" placeholder="Username" />
+        <input id="signupEmail" type="email" class="input" placeholder="Email" />
+        <input id="signupPassword" type="password" class="input" placeholder="Password" />
       </div>
-      <button class="submit-btn">Sign up</button>
+      <button class="submit-btn" @click="Signup">Sign up</button>
     </div>
     <div class="login slide-up">
       <div class="center">
         <h2 class="form-title" @click="myfunLogin" id="loginButton"><span>Or</span>Log in</h2>
         <div class="form-holder">
-          <input type="email" class="input" placeholder="Email" />
-          <input type="password" class="input" placeholder="Password" />
+          <input id="loginEmail" type="email" class="input" placeholder="Email" />
+          <input id="loginPassword" type="password" class="input" placeholder="Password" />
         </div>
-        <button class="submit-btn">Log in</button>
+        <button class="submit-btn"  @click="Login">Log in</button>
       </div>
     </div>
   </div>
@@ -65,7 +65,31 @@
             parent.classList.remove('slide-up')
           }
         });
-      }
+      },
+      Signup: function (event) {
+        
+        const signupUsername = document.getElementById('signupUsername');
+        const signupEmail = document.getElementById('signupEmail');
+        const signupPassword = document.getElementById('signupPassword');
+        if(signupUsername.value=="" || signupEmail.value=="" || signupPassword.value==""){
+          alert("Please fill up all the inputs!");
+          event.preventDefault();
+        } else {
+          alert("signup");
+        }
+
+        
+      },
+      Login: function (event) {
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        if(loginEmail.value=="" || loginPassword.value==""){
+          alert("Please fill up all the inputs!");
+          event.preventDefault();
+        } else {
+          alert("login");
+        }
+      },
     },
   };
 </script>
