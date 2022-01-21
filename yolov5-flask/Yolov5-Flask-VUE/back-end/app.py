@@ -40,10 +40,15 @@ def allowed_file(filename):
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
 
-@app.route('/loginPage')
+@app.route('/loginPage', methods=['POST'])
 def loginPage():
     print("jjj")
     return "j"
+
+@app.route('/signupPage', methods=['POST'])
+def signupPage():
+    print("kkk")
+    return "k"
 
 @app.route('/model', methods=['POST'])
 def choose_model():
