@@ -124,10 +124,10 @@
   };
 </script>
 
-<style>
+<style scoped>
   html,
   body {
-    position: relative;
+    position: relative ;
     min-height: 100vh;
     background-color: #E1E8EE;
     display: flex;

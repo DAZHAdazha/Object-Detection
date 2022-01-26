@@ -179,15 +179,15 @@ if __name__ == '__main__':
     with app.app_context():
         current_app.model = Detector()
 
-    # 删除表
-    db.drop_all()
-    # 创建表
-    db.create_all()
-    # 生成数据
-    u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
-    db.session.add(u1)
-    # 提交会话
-    db.session.commit()
+    # # 删除表
+    # db.drop_all()
+    # # 创建表
+    # db.create_all()
+    # # 生成数据
+    # u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
+    # db.session.add(u1)
+    # # 提交会话
+    # db.session.commit()
 
 
     app.run(host='127.0.0.1', port=5003, debug=True)

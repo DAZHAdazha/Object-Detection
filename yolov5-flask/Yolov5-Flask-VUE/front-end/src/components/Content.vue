@@ -251,7 +251,9 @@
   };
 </script>
 
+
 <style scoped>
+
   .el-button {
     padding: 12px 20px !important;
   }
@@ -276,9 +278,7 @@
     line-height: 20px;
     /* font-weight: 400; */
   }
-</style>
 
-<style scoped>
   * {
     box-sizing: border-box;
     margin: 0;

@@ -7,11 +7,18 @@
   </div>
 </template>
 
+<style scoped>
+  @import '../node_modules/element-ui/lib/theme-chalk/index.css';
+  @import '../src/assets/style.css';
+  @import './theme/index.css';
+</style>
+
 
 <script>
   import Header from "./components/Header";
   import Footer from "./components/Footer";
   import Content from "./components/Content";
+  
 
   export default {
     name: "Object Detection Yolov5",

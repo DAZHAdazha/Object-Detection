@@ -12,9 +12,11 @@ import echarts from "echarts";
 import 'jquery'
 
 Vue.prototype.$echarts = echarts;
-import '../node_modules/element-ui/lib/theme-chalk/index.css'
-import '../src/assets/style.css'
-import './theme/index.css'
+
+
+
+
+
 
 Vue.use(Element)
 Vue.config.productionTip = false
