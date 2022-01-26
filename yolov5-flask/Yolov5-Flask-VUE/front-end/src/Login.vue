@@ -68,18 +68,17 @@
       },
       Signup: function (event) {
         
-        const signupUsername = document.getElementById('signupUsername');
-        const signupEmail = document.getElementById('signupEmail');
-        const signupPassword = document.getElementById('signupPassword');
-        if(signupUsername.value=="" || signupEmail.value=="" || signupPassword.value==""){
+        const signupUsername = document.getElementById('signupUsername').value;
+        const signupEmail = document.getElementById('signupEmail').value;
+        const signupPassword = document.getElementById('signupPassword').value;
+        if(signupUsername=="" || signupEmail=="" || signupPassword==""){
           alert("Please fill up all the inputs!");
           event.preventDefault();
         } else {
-          alert("signup");
           var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
           httpRequest.open('POST', 'http://127.0.0.1:5003/signupPage', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
           httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-          var obj = { name: 'zhansgan', age: 18 };
+          var obj = { username: signupUsername, email: signupEmail, password: signupPassword };
           httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
           /**
            * 获取数据后的处理程序
@@ -89,8 +88,6 @@
                   var json = httpRequest.responseText;//获取到服务端返回的数据
                   alert(json);
           
-              } else{
-                alert("...");
               }
           };
         }
@@ -98,17 +95,16 @@
         
       },
       Login: function (event) {
-        const loginEmail = document.getElementById('loginEmail');
-        const loginPassword = document.getElementById('loginPassword');
-        if(loginEmail.value=="" || loginPassword.value==""){
+        const loginEmail = document.getElementById('loginEmail').value;
+        const loginPassword = document.getElementById('loginPassword').value;
+        if(loginEmail=="" || loginPassword==""){
           alert("Please fill up all the inputs!");
           event.preventDefault();
         } else {
-          alert("login");
           var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
           httpRequest.open('POST', 'http://127.0.0.1:5003/loginPage', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
           httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-          var obj = { name: 'zhansgan', age: 18 };
+          var obj = { email: loginEmail, password: loginPassword };
           httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
           /**
            * 获取数据后的处理程序
@@ -118,8 +114,6 @@
                   var json = httpRequest.responseText;//获取到服务端返回的数据
                   alert(json);
           
-              } else{
-                alert("...");
               }
           };
 

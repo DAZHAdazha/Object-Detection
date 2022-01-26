@@ -5,6 +5,10 @@ import shutil
 from datetime import timedelta
 from flask import *
 from processor.AIDetector_pytorch import Detector
+from flask_sqlalchemy import SQLAlchemy
+from functools import wraps
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 import core.main
 
@@ -15,12 +19,51 @@ app = Flask(__name__)
 app.secret_key = 'secret!'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# 配置mysql
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:fengyunjia@127.0.0.1:3306/object_detection'  # mysql://username:password@hostname/database
+# 是否动态修改 如为True 则会消耗性能 且改接口以后会被弃用 不建议开启
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
 werkzeug_logger = rel_log.getLogger('werkzeug')
 werkzeug_logger.setLevel(rel_log.ERROR)
 
 # 解决缓存刷新问题
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(32))
+    email = db.Column(db.String(32), unique=True)
+    password = db.Column(db.Text)
+
+    def __init__(self, *args, **kwargs):
+        name = kwargs.get('name')
+        password = kwargs.get('password')
+        email = kwargs.get('email')
+        self.name = name
+        # 加密密码，注意需要导入
+        self.password = generate_password_hash(password)
+        self.email = email
+
+    # 检查密码函数
+    def check_password(self, raw_password):
+        result = check_password_hash(self.password, raw_password)
+        return result
+    def __repr__(self):
+        return '<Role: %s %s %s %s>' % (self.name, self.id, self.email, self.password)
+
+# 登录限制装饰器 增加到购物车等函数
+def login_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if session.get('user_username'):
+            return func(*args, **kwargs)
+        else:
+            return redirect(url_for('static', filename='./index.html'))
+    return wrapper
 
 # 添加header解决跨域
 @app.after_request
@@ -42,13 +85,39 @@ def hello_world():
 
 @app.route('/loginPage', methods=['POST'])
 def loginPage():
-    print("jjj")
-    return "j"
+    data = request.get_json()
+    email =data["email"]
+    password = data["password"]
+    print(email)
+    print(password)
+    user = User.query.filter_by(email=email).first()
+    if user:
+        if user.check_password(password):
+            print(user)
+            print(user.password)
+            session['user_username'] = user.name
+            return 'Login successfully'
+        else:
+            return 'Wrong password'
+    else:
+        return "This email had not been registered yet."
 
 @app.route('/signupPage', methods=['POST'])
 def signupPage():
-    print("kkk")
-    return "k"
+    data = request.get_json()
+    email = data["email"]
+    password = data["password"]
+    username = data["username"]
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return "This email was already registered."
+    else:
+        new_user = User(name=username, password=password,email=email)
+        db.session.add(new_user)
+        db.session.commit()
+        #保存session
+        session['user_username'] = username
+        return "Signup successfully!"
 
 @app.route('/model', methods=['POST'])
 def choose_model():
@@ -109,4 +178,16 @@ if __name__ == '__main__':
             os.makedirs(ff)
     with app.app_context():
         current_app.model = Detector()
+
+    # 删除表
+    db.drop_all()
+    # 创建表
+    db.create_all()
+    # 生成数据
+    u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
+    db.session.add(u1)
+    # 提交会话
+    db.session.commit()
+
+
     app.run(host='127.0.0.1', port=5003, debug=True)
