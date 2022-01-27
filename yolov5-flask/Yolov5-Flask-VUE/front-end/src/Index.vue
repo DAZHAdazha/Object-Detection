@@ -8,9 +8,7 @@
 </template>
 
 <style scoped>
-  @import '../node_modules/element-ui/lib/theme-chalk/index.css';
-  @import '../src/assets/style.css';
-  @import './theme/index.css';
+
 </style>
 
 
@@ -19,6 +17,7 @@
   import Footer from "./components/Footer";
   import Content from "./components/Content";
   
+
 
   export default {
     name: "Object Detection Yolov5",
@@ -31,5 +30,8 @@
       "app-footer": Footer,
     },
     methods: {},
+    mounted() {
+      document.documentElement.style.setProperty('--app-bg','rgb(225, 232, 238)')
+    }
   };
 </script>

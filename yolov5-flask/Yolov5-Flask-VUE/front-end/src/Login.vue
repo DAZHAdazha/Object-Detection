@@ -2,12 +2,12 @@
   <div id="login">
 
     <router-link to="/">
-    <div id="home" style="color:black;position: absolute; top:5em; font-size:70px;margin-left:-100%">
+    <div id="home" style="color:black;position: absolute; top:5em; font-size:70px;margin-left:15%">
     <i class="el-icon-back"></i>
     </div>
     </router-link>
 
-    <div class="form-structor">
+    <div class="form-structor" style="margin-left:40%; margin-top:8%">
     <div class="signup">
       <h2 style="margin-left:-35px" class="form-title" @click="myfunSignup" id="signup"><span>Or</span>Sign up</h2>
       <div class="form-holder">

@@ -1,5 +1,5 @@
 <template>
-  <div id="Content">
+  <div id="Content" >
     <el-dialog title="AI is detecting" :visible.sync="dialogTableVisible" :show-close="false"
       :close-on-press-escape="false" :append-to-body="true" :close-on-click-modal="false" :center="true">
       <el-progress :percentage="percentage"></el-progress>
@@ -254,6 +254,7 @@
 
 <style scoped>
 
+
   .el-button {
     padding: 12px 20px !important;
   }
@@ -348,7 +349,7 @@
   .image_1 {
     width: 275px;
     height: 260px;
-    background: #ffffff;
+    background: #ffffff !important;
     margin-left: 80px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
@@ -460,7 +461,7 @@
   #Content {
     width: 85%;
     height: 800px;
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     margin: 15px auto;
     display: flex;
     min-width: 1200px;
@@ -474,7 +475,7 @@
   }
 
   .divider_1 {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     height: 2px !important;
     width: 100%;
     margin-bottom: 20px;
