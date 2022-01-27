@@ -55,6 +55,19 @@ class User(db.Model):
     def __repr__(self):
         return '<Role: %s %s %s %s>' % (self.name, self.id, self.email, self.password)
 
+
+class Images(db.Model):
+    __tablename__ = 'images'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    userid = db.Column(db.Integer,nullable=True)
+    name = db.Column(db.String(32))
+    size = db.Column(db.String(32))
+    objects = db.Column(db.String(32))
+    date = db.Column(db.DateTime, nullable=True)
+
+    def __repr__(self):
+        return '<%s %s %s %s %s>' % (self.id, self.name, self.size, self.objects, self.date)
+
 # 登录限制装饰器 增加到购物车等函数
 def login_required(func):
     @wraps(func)

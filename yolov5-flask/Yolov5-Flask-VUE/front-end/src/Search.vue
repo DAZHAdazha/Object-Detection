@@ -1,11 +1,11 @@
 <template>
   <div id="search">
-
+<!-- 
     <router-link to="/">
     <div id="home" style="color:black;position: absolute; top:5em; font-size:70px;margin-left:-100%">
     <i class="el-icon-back"></i>
     </div>
-    </router-link>
+    </router-link> -->
 
   <html lang="en">
     <head>
@@ -26,11 +26,13 @@
                     </div>
                 </div>
                 <ul class="sidebar-list">
+                  <router-link to="/">
                     <li class="sidebar-list-item">
                         <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                         <polyline points="9 22 9 12 15 12 15 22"></polyline></svg> <span>Home</span></a>
                     </li>
+                    </router-link>
                     <li class="sidebar-list-item active">
                         <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -75,7 +77,7 @@
                     <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></button> <button class="app-content-headerButton">Log Out</button>
                 </div>
                 <div class="app-content-actions">
-                    <input class="search-bar" placeholder="Search..." type="text">
+                    <input style="display:none;" class="search-bar" placeholder="Search..." type="text">
                     <div class="app-content-actions-wrapper">
                         <!-- <div class="filter-button-wrapper">
                             <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
@@ -129,13 +131,13 @@
                 <div class="products-area-wrapper tableView">
                     <div class="products-header">
                         <div class="product-cell image">
-                            Items 
+                            Names
                             <!-- <button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 512 512">
                             <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"></path></svg>
                             </button> -->
                         </div>
                         <div class="product-cell category">
-                            Category 
+                            Sizes
                             <!-- <button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 512 512">
                             <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"></path></svg>
                             </button> -->
@@ -147,7 +149,7 @@
                         </button> -->
                         </div>
                         <div class="product-cell sales">
-                            Sales 
+                            Objects 
                             <!-- <button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 512 512">
                             <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"></path></svg>
                         </button> -->
@@ -159,7 +161,7 @@
                         </button> -->
                         </div>
                         <div class="product-cell price">
-                            Price 
+                            Date 
                             <!-- <button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 512 512">
                             <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"></path></svg>
                         </button> -->
