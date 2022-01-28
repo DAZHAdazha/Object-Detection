@@ -74,7 +74,7 @@
                         Images
                     </h1><button class="mode-switch" title="Switch Theme"><svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewbox="0 0 24 24">
                     <defs></defs>
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></button> <button class="app-content-headerButton">Log Out</button>
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></button> <button @click="myfunLogout" class="app-content-headerButton">Log Out</button>
                 </div>
                 <div class="app-content-actions">
                     <input style="display:none;" class="search-bar" placeholder="Search..." type="text">
@@ -501,7 +501,24 @@
     },
     components: {},
     methods: {
-
+      myfunLogout: function () {
+        var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+          httpRequest.open('POST', 'http://127.0.0.1:5003/logout', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+          httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+          httpRequest.send();//发送请求 将json写入send中
+          /**
+           * 获取数据后的处理程序
+           */
+          httpRequest.onreadystatechange = ()=>{ //请求后的回调接口，可将请求成功后要执行的程序写在其中
+              if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                  // var json = httpRequest.responseText;//获取到服务端返回的数据
+                  // alert(json);
+                  alert('Logout successfully');
+                  this.$router.push('/');
+                  
+              }
+          };
+      }
     },
     mounted() {
         document.querySelector(".grid").addEventListener("click", function () {

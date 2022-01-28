@@ -19,6 +19,8 @@ app = Flask(__name__)
 app.secret_key = 'secret!'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+mysession = {}
+
 # 配置mysql
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:fengyunjia@127.0.0.1:3306/object_detection'  # mysql://username:password@hostname/database
 # 是否动态修改 如为True 则会消耗性能 且改接口以后会被弃用 不建议开启
@@ -68,15 +70,6 @@ class Images(db.Model):
     def __repr__(self):
         return '<%s %s %s %s %s>' % (self.id, self.name, self.size, self.objects, self.date)
 
-# 登录限制装饰器 增加到购物车等函数
-def login_required(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        if session.get('user_username'):
-            return func(*args, **kwargs)
-        else:
-            return redirect(url_for('static', filename='./index.html'))
-    return wrapper
 
 # 添加header解决跨域
 @app.after_request
@@ -91,24 +84,40 @@ def after_request(response):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+@app.route('/validation', methods=['POST'])
+def validation():
+    print(mysession.get("user_username"))
+    try:
+        if mysession.get("user_username"):
+            return "1"
+        else:
+            return "0"
+    except:
+        pass
 
 @app.route('/')
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    try:
+        del mysession['user_username']
+    except:
+        pass
+    print("hhh")
+    return 'Logout'
+
 
 @app.route('/loginPage', methods=['POST'])
 def loginPage():
     data = request.get_json()
     email =data["email"]
     password = data["password"]
-    print(email)
-    print(password)
     user = User.query.filter_by(email=email).first()
     if user:
         if user.check_password(password):
-            print(user)
-            print(user.password)
-            session['user_username'] = user.name
+            mysession['user_username'] = user.name
             return 'Login successfully'
         else:
             return 'Wrong password'
@@ -129,7 +138,7 @@ def signupPage():
         db.session.add(new_user)
         db.session.commit()
         #保存session
-        session['user_username'] = username
+        mysession['user_username'] = new_user.name
         return "Signup successfully!"
 
 @app.route('/model', methods=['POST'])
