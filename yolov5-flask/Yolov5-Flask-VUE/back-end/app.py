@@ -86,10 +86,9 @@ def allowed_file(filename):
 
 @app.route('/validation', methods=['POST'])
 def validation():
-    print(mysession.get("user_username"))
     try:
         if mysession.get("user_username"):
-            return "1"
+            return mysession.get("user_username")
         else:
             return "0"
     except:

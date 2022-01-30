@@ -11,15 +11,14 @@
         2018110239
       </span>
 
-      <router-link to="/login">
 
         <a id="login">
-          <span class="link" style="color:#21B3B9; font-weight: bold; float:right">
+          <span @click="myfunRouter" id="loginText" class="link" style="color:#21B3B9; font-weight: bold; float:right">
             Log in/Sign up
             
           </span>
         </a>
-      </router-link>
+
 
     </div>
     <div id="word">
@@ -33,13 +32,16 @@
     data() {
       return {
         msg: "Object Detection Yolov5",
-        // user:$route.params,
+        user:"login",
       };
     },
     methods: {
-      
+      myfunRouter: function (){
+        this.$router.push('/' + this.user);
+        location.reload();
+      },
     
-  },mounted () {
+  },created () {
 
           var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
           httpRequest.open('POST', 'http://127.0.0.1:5003/validation', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
@@ -48,11 +50,14 @@
           /**
            * 获取数据后的处理程序
            */
-          httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+          httpRequest.onreadystatechange = () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
               if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
                   var json = httpRequest.responseText;//获取到服务端返回的数据
-                  alert(json);
-          
+                  if(json!='0'){
+                    const sign = document.getElementById('loginText');
+                    sign.innerHTML = json;
+                    this.user = "search";
+                  }
               }
           };
         

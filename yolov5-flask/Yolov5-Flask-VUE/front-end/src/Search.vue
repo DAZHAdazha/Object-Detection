@@ -60,7 +60,7 @@
                         <img src="https://images.unsplash.com/photo-1527736947477-2790e28f3443?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE2fHx3b21hbnxlbnwwfHwwfHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=900&amp;q=60" alt="Account">
                     </div>
                     <div class="account-info-name">
-                        Monica G.
+                        {{user}}
                     </div>
                     <!-- <button class="account-info-more"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal">
                     <circle cx="12" cy="12" r="1"></circle>
@@ -497,7 +497,9 @@
   export default {
     name: "Object Detection Yolov5",
     data() {
-      return {};
+      return {
+        user:"username",
+      };
     },
     components: {},
     methods: {
@@ -541,6 +543,27 @@
       modeSwitch.addEventListener('click', function () {                      document.documentElement.classList.toggle('light');
       modeSwitch.classList.toggle('active');
       });
+
+        var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+          httpRequest.open('POST', 'http://127.0.0.1:5003/validation', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+          httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+          httpRequest.send();//发送请求 将json写入send中
+          /**
+           * 获取数据后的处理程序
+           */
+          httpRequest.onreadystatechange =  () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+              if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                  var json = httpRequest.responseText;//获取到服务端返回的数据
+                  if(json=='0'){
+                    alert("Please log in first!");
+                    this.$router.push('/');
+                  }else{
+                    this.user = json;
+                  }
+          
+              }
+          };
+
     }
   };
 

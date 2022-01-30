@@ -2,7 +2,7 @@
   <div id="login">
 
     <router-link to="/">
-    <div id="home" style="color:black;position: absolute; top:5em; font-size:70px;margin-left:15%">
+    <div id="home" style="color:white;position: absolute; top:5em; font-size:70px;margin-left:15%">
     <i class="el-icon-back"></i>
     </div>
     </router-link>
