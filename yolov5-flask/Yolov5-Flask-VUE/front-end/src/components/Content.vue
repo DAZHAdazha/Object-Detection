@@ -41,6 +41,8 @@
                       Upload image
                       <input ref="upload" style="display: none" name="file" type="file" @change="update" />
                     </el-button>
+
+
                   </div>
                 </div>
               </el-image>
@@ -71,11 +73,18 @@
         <el-card style="border-radius: 8px">
           <div slot="header" class="clearfix">
             <span style="color:#ff7c0b; font-weight:bold">Object Detection</span>
-            <el-button style="margin-left: 250px" v-show="!showbutton" type="primary" icon="el-icon-upload"
+            <el-button style="margin-left: 200px" v-show="!showbutton" type="primary" icon="el-icon-upload"
               class="download_bt" v-on:click="true_upload2">
               Reload image
               <input ref="upload2" style="display: none" name="file" type="file" @change="update" />
             </el-button>
+
+            <el-button style="margin-left: 100px" v-show="!showbutton" type="primary" icon="el-icon-star-on"
+              class="download_bt" v-on:click="bookmark">
+              Bookmark image
+            </el-button>
+
+
           </div>
           <el-tabs v-model="activeName">
             <el-tab-pane label="Detected Objects" name="first">
@@ -136,6 +145,7 @@
         showbutton: true,
         percentage: 0,
         fullscreenLoading: false,
+        image_num:0,
         opacitys: {
           opacity: 0,
         },
@@ -159,6 +169,65 @@
       },
       true_upload2() {
         this.$refs.upload2.click();
+      },
+      bookmark() {
+        const sign = document.getElementById('loginText').innerText;
+        // todo fixed
+        if(sign=="Log in/Sign up"){
+          this.$notify({
+          title: "Bookmark failed",
+          message: "Please log in first!",
+          duration: 2000,
+          type: "warning",
+        });
+        } else {
+            var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+            httpRequest.open('POST', 'http://127.0.0.1:5003/bookmark', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+            httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+            var obj = { path:this.url_2,user:sign,num:this.image_num};
+            httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
+            /**
+             * 获取数据后的处理程序
+             */
+            httpRequest.onreadystatechange = () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                    var json = httpRequest.responseText;//获取到服务端返回的数据
+                    
+                      if(sign!="Log in/Sign up"){
+                        if(json=="0"){
+                        this.$notify({
+                        title: "Bookmark success",
+                        message: "Bookmark this image successfully",
+                        duration: 2000,
+                        type: "success",
+                      });
+                    }else if(json=="1"){
+                      this.$notify({
+                        title: "Bookmark failed",
+                        message: "This image had already been marked...",
+                        duration: 2000,
+                        type: "error",
+                      });
+                    } else {
+                      this.$notify({
+                        title: "Bookmark failed",
+                        message: "something wrong...",
+                        duration: 2000,
+                        type: "error",
+                      });
+                    }
+                } else {
+                  this.$notify({
+                        title: "Bookmark failed",
+                        message: "Please log in to use bookmark",
+                        duration: 2000,
+                        type: "error",
+                      });
+                }
+            }
+          }
+        
+        }
       },
       next() {
         this.active++;
@@ -215,7 +284,7 @@
             this.loading = false;
 
             this.feat_list = Object.keys(response.data.image_info);
-
+            this.image_num = this.feat_list.length;
             for (var i = 0; i < this.feat_list.length; i++) {
               response.data.image_info[this.feat_list[i]][2] = this.feat_list[i];
               this.feature_list.push(response.data.image_info[this.feat_list[i]]);

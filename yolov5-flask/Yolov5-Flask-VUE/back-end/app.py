@@ -94,6 +94,32 @@ def validation():
     except:
         pass
 
+@app.route('/bookmark', methods=['POST'])
+def bookmark():
+    # try:
+        data = request.get_json()
+        print(data['path'])
+        print(data['user'])
+        print(data['num'])
+        print(datetime.datetime.now())
+        filename = str(data['path']).split("/")[-1]
+        filePath = "./tmp/draw/" + filename
+        print(filePath)
+        fsize = os.path.getsize(filePath)/float(1024*1024)
+        print(fsize)
+        # todo bug email is unique, username is not
+        user = User.query.filter_by(name=data['user']).first()
+        img = Images.query.filter_by(name=filename,userid=user.id).first()
+        if not img:
+            image1 = Images(userid=user.id,objects=data['num'],size=fsize,date=datetime.datetime.now(),name=filename)
+            db.session.add(image1)
+            db.session.commit()
+            return "0"
+        else:
+            return "1"
+    # except:
+    #     print("2222")
+    #     return "2"
 @app.route('/')
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
@@ -104,7 +130,6 @@ def logout():
         del mysession['user_username']
     except:
         pass
-    print("hhh")
     return 'Logout'
 
 
@@ -117,11 +142,11 @@ def loginPage():
     if user:
         if user.check_password(password):
             mysession['user_username'] = user.name
-            return 'Login successfully'
+            return "1"
         else:
-            return 'Wrong password'
+            return "0"
     else:
-        return "This email had not been registered yet."
+        return "2"
 
 @app.route('/signupPage', methods=['POST'])
 def signupPage():
@@ -138,12 +163,11 @@ def signupPage():
         db.session.commit()
         #保存session
         mysession['user_username'] = new_user.name
-        return "Signup successfully!"
+        return "1"
 
 @app.route('/model', methods=['POST'])
 def choose_model():
     for i in request.form.keys():
-        print(i)
         current_app.model.changeModel(str(i))
     return "ok"
 
@@ -200,15 +224,15 @@ if __name__ == '__main__':
     with app.app_context():
         current_app.model = Detector()
 
-    # # 删除表
-    # db.drop_all()
-    # # 创建表
-    # db.create_all()
-    # # 生成数据
-    # u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
-    # db.session.add(u1)
-    # # 提交会话
-    # db.session.commit()
+    # 删除表
+    db.drop_all()
+    # 创建表
+    db.create_all()
+    # 生成数据
+    u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
+    db.session.add(u1)
+    # 提交会话
+    db.session.commit()
 
 
     app.run(host='127.0.0.1', port=5003, debug=True)

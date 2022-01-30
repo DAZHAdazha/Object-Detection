@@ -72,7 +72,12 @@
         const signupEmail = document.getElementById('signupEmail').value;
         const signupPassword = document.getElementById('signupPassword').value;
         if(signupUsername=="" || signupEmail=="" || signupPassword==""){
-          alert("Please fill up all the inputs!");
+          this.$notify({
+                        title: "Sign up failed",
+                        message: "Please fill up all the inputs!",
+                        duration: 2000,
+                        type: "warning",
+                      });
           event.preventDefault();
         } else {
           var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
@@ -86,8 +91,23 @@
           httpRequest.onreadystatechange =  () =>{//请求后的回调接口，可将请求成功后要执行的程序写在其中
               if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
                   var json = httpRequest.responseText;//获取到服务端返回的数据
-                  alert(json);
+                  if(json=='1'){
+                    this.$notify({
+                        title: "Sign up successfully!",
+                        message: "Sign up successfully!",
+                        duration: 2000,
+                        type: "success",
+                      });
                   this.$router.push('/search');
+                  } else {
+                    this.$notify({
+                        title: "Sign up successfully!",
+                        message: json,
+                        duration: 2000,
+                        type: "warning",
+                      });
+                  }
+                  
               }
           };
         }
@@ -98,7 +118,12 @@
         const loginEmail = document.getElementById('loginEmail').value;
         const loginPassword = document.getElementById('loginPassword').value;
         if(loginEmail=="" || loginPassword==""){
-          alert("Please fill up all the inputs!");
+          this.$notify({
+                        title: "Login failed",
+                        message: "Please fill up all the inputs!",
+                        duration: 2000,
+                        type: "warning",
+                      });
           event.preventDefault();
         } else {
           var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
@@ -112,8 +137,31 @@
           httpRequest.onreadystatechange = () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
               if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
                   var json = httpRequest.responseText;//获取到服务端返回的数据
-                  alert(json);
+                  if(json=='1'){
+                    this.$notify({
+                        title: "Log in successfully!",
+                        message: "Log in successfully!",
+                        duration: 2000,
+                        type: "success",
+                      });
                   this.$router.push('/search');
+                  } else if(json=='0'){
+                    this.$notify({
+                        title: "Log in failed!",
+                        message: "Wrong password",
+                        duration: 2000,
+                        type: "error",
+                      });
+                  } else if (json=='2'){
+                      this.$notify({
+                        title: "Log in failed!",
+                        message: "This email had already been registered",
+                        duration: 2000,
+                        type: "warning",
+                      });
+
+                  }
+                  
           
               }
           };

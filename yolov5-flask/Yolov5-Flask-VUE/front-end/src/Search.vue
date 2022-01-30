@@ -154,12 +154,7 @@
                             <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"></path></svg>
                         </button> -->
                         </div>
-                        <div class="product-cell stock">
-                            Stock 
-                            <!-- <button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 512 512">
-                            <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"></path></svg>
-                        </button> -->
-                        </div>
+
                         <div class="product-cell price">
                             Date 
                             <!-- <button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 512 512">
@@ -173,7 +168,7 @@
                         <circle cx="12" cy="5" r="1"></circle>
                         <circle cx="12" cy="19" r="1"></circle></svg></button>
                         <div class="product-cell image">
-                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="product"> <span>Ocean</span>
+                            <img src="../../back-end/tmp/draw/000014.jpg" alt="product"> <span>Ocean</span>
                         </div>
                         <div class="product-cell category">
                             <span class="cell-label">Category:</span>Furniture
@@ -184,9 +179,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>11
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>36
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$560
                         </div>
@@ -208,9 +201,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>6
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>46
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$710
                         </div>
@@ -232,9 +223,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>61
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>56
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$360
                         </div>
@@ -256,9 +245,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>41
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>66
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$260
                         </div>
@@ -280,9 +267,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>32
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>40
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$350
                         </div>
@@ -304,9 +289,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>22
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>44
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$160
                         </div>
@@ -328,9 +311,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>23
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>45
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$340
                         </div>
@@ -352,9 +333,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>32
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>40
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$350
                         </div>
@@ -376,9 +355,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>24
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>46
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$60
                         </div>
@@ -400,9 +377,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>41
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>16
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$270
                         </div>
@@ -424,9 +399,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>52
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>16
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$230
                         </div>
@@ -448,9 +421,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>21
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>46
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$252
                         </div>
@@ -472,9 +443,7 @@
                         <div class="product-cell sales">
                             <span class="cell-label">Sales:</span>32
                         </div>
-                        <div class="product-cell stock">
-                            <span class="cell-label">Stock:</span>40
-                        </div>
+
                         <div class="product-cell price">
                             <span class="cell-label">Price:</span>$350
                         </div>
@@ -514,8 +483,11 @@
           httpRequest.onreadystatechange = ()=>{ //请求后的回调接口，可将请求成功后要执行的程序写在其中
               if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
                   // var json = httpRequest.responseText;//获取到服务端返回的数据
-                  // alert(json);
-                  alert('Logout successfully');
+                  this.$notify({
+                        title: "Log out successfully!",
+                        duration: 2000,
+                        type: "success",
+                      });
                   this.$router.push('/');
                   
               }
@@ -555,7 +527,12 @@
               if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
                   var json = httpRequest.responseText;//获取到服务端返回的数据
                   if(json=='0'){
-                    alert("Please log in first!");
+                    this.$notify({
+                        title: "Enter this page failed",
+                        message: "Please log in first!",
+                        duration: 2000,
+                        type: "warning",
+                      });
                     this.$router.push('/');
                   }else{
                     this.user = json;
