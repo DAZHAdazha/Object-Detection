@@ -11,6 +11,8 @@ import Element from 'element-ui'
 import echarts from "echarts";
 import 'jquery'
 
+
+
 Vue.prototype.$echarts = echarts;
 
 

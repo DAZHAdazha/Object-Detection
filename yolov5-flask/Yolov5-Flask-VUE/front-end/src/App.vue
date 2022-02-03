@@ -5,14 +5,17 @@
   </div>
 </template>
 
+
 <script>
+
   export default {
+    
     name: "Object Detection Yolov5",
     data() {
       return {};
     },
     components: {
-
+      
     },
     methods: {},
   };

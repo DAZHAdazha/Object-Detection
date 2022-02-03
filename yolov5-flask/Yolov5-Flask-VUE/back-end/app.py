@@ -96,17 +96,11 @@ def validation():
 
 @app.route('/bookmark', methods=['POST'])
 def bookmark():
-    # try:
+    try:
         data = request.get_json()
-        print(data['path'])
-        print(data['user'])
-        print(data['num'])
-        print(datetime.datetime.now())
         filename = str(data['path']).split("/")[-1]
         filePath = "./tmp/draw/" + filename
-        print(filePath)
         fsize = os.path.getsize(filePath)/float(1024*1024)
-        print(fsize)
         # todo bug email is unique, username is not
         user = User.query.filter_by(name=data['user']).first()
         img = Images.query.filter_by(name=filename,userid=user.id).first()
@@ -117,12 +111,25 @@ def bookmark():
             return "0"
         else:
             return "1"
-    # except:
-    #     print("2222")
-    #     return "2"
+    except:
+        print("2222")
+        return "2"
 @app.route('/')
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
+
+@app.route('/images', methods=['POST'])
+def images():
+    data = request.get_json()
+    print(data['username'])
+    user = User.query.filter_by(name=data['username']).first()
+    images = Images.query.filter_by(userid=user.id)
+    mydic = []
+    for i in images:
+        mydic.append(str(i))
+    print(mydic)
+    return ''.join(mydic)
+
 
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -224,15 +231,15 @@ if __name__ == '__main__':
     with app.app_context():
         current_app.model = Detector()
 
-    # 删除表
-    db.drop_all()
-    # 创建表
-    db.create_all()
-    # 生成数据
-    u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
-    db.session.add(u1)
-    # 提交会话
-    db.session.commit()
+    # # 删除表
+    # db.drop_all()
+    # # 创建表
+    # db.create_all()
+    # # 生成数据
+    # u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
+    # db.session.add(u1)
+    # # 提交会话
+    # db.session.commit()
 
 
     app.run(host='127.0.0.1', port=5003, debug=True)
