@@ -101,7 +101,7 @@
                   this.$router.push('/search');
                   } else {
                     this.$notify({
-                        title: "Sign up successfully!",
+                        title: "Sign up failed!",
                         message: json,
                         duration: 2000,
                         type: "warning",
@@ -155,7 +155,7 @@
                   } else if (json=='2'){
                       this.$notify({
                         title: "Log in failed!",
-                        message: "This email had already been registered",
+                        message: "Can not find this account",
                         duration: 2000,
                         type: "warning",
                       });

@@ -80,7 +80,7 @@
                             Names
                         </div>
                         <div class="product-cell category">
-                            Sizes
+                            Sizes(MB)
                         </div>
                         <div class="product-cell sales">
                             Objects 
@@ -93,27 +93,27 @@
                         </div>
                     </div>
                     <div class="products-row" v-for="imageset in imagesets">
-                      {{ imageset }}
+                      
                         <button class="cell-more-button"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
                         <circle cx="12" cy="12" r="1"></circle>
                         <circle cx="12" cy="5" r="1"></circle>
                         <circle cx="12" cy="19" r="1"></circle></svg></button>
                         <div class="product-cell image">
-                            <img src="../../back-end/tmp/draw/000014.jpg" alt="product"> <span>Ocean</span>
+                            <img style="cursor:pointer" v-viewer :src="require(`../../back-end/tmp/draw/${imageset[1]}`)" alt="product"> <span>{{ imageset[1] }}</span>
                         </div>
                         <div class="product-cell category">
-                            <span class="cell-label">Category:</span>Furniture
+                            <span class="cell-label">Sizes:</span>{{ imageset[2] }}
                         </div>
                         <div class="product-cell sales">
-                            <span class="cell-label">Sales:</span>11
+                            <span class="cell-label">Objects:</span>{{ imageset[3] }}
                         </div>
                         <div class="product-cell price">
-                            <span class="cell-label">Price:</span>$560
+                            <span class="cell-label">Date:</span>{{ imageset[4] +" "+ imageset[5] }}
                         </div>
                         <div class="product-cell status-cell">
                             <span class="cell-label">Status:</span> <span class="status active">Marked</span>
 
-                                  <span style="margin-left:80px;">  <el-button type="danger" icon="el-icon-delete" circle></el-button></span>
+                                  <span @click="mydelete" style="margin-left:80px;">  <el-button type="danger" icon="el-icon-delete" circle></el-button></span>
 
                         </div>
                     </div>
@@ -146,6 +146,30 @@
     },
     components: {},
     methods: {
+      mydelete: function(event){
+          var thisimage = event.currentTarget;
+          var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+          httpRequest.open('POST', 'http://127.0.0.1:5003/delete', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
+          httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+          var obj = { username:this.user, imagename:thisimage.parentNode.parentNode.firstChild.nextSibling.firstChild.nextSibling.innerHTML};
+          httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
+          /**
+           * 获取数据后的处理程序
+           */
+          httpRequest.onreadystatechange = ()=>{ //请求后的回调接口，可将请求成功后要执行的程序写在其中
+              if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
+                  var json = httpRequest.responseText;//获取到服务端返回的数据
+                  this.$notify({
+                        title: "Remove successfully!",
+                        message:json,
+                        duration: 2000,
+                        type: "success",
+                      });
+                      this.$router.go(0);
+                  
+              }
+          };
+      },
       myfunLogout: function () {
         var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
           httpRequest.open('POST', 'http://127.0.0.1:5003/logout', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
@@ -231,8 +255,8 @@
                                 for(var j=0;j<myimages.length;j++){
                                   mydic[j] = myimages[j].toString().split(" ");
                                 }
-                                alert(mydic['0']);
-                                alert(mydic['1']);
+                            
+
                                 for(var k=0;k<myimages.length;k++){
                                   this.imagesets.push(mydic[k]);
                                 }

@@ -6,8 +6,8 @@ from datetime import timedelta
 from flask import *
 from processor.AIDetector_pytorch import Detector
 from flask_sqlalchemy import SQLAlchemy
-from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
+
 
 
 import core.main
@@ -37,7 +37,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(32),unique=True)
     email = db.Column(db.String(32), unique=True)
     password = db.Column(db.Text)
 
@@ -62,7 +62,8 @@ class Images(db.Model):
     __tablename__ = 'images'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     userid = db.Column(db.Integer,nullable=True)
-    name = db.Column(db.String(32))
+    #todo name should be unique
+    name = db.Column(db.String(32),unique=True)
     size = db.Column(db.String(32))
     objects = db.Column(db.String(32))
     date = db.Column(db.DateTime, nullable=True)
@@ -94,6 +95,18 @@ def validation():
     except:
         pass
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    data = request.get_json()
+    print(data['username'])
+    print(data['imagename'])
+    user = User.query.filter_by(name=data['username']).first()
+    img = Images.query.filter_by(name=data['imagename'], userid=user.id).first()
+    db.session.delete(img)
+    db.session.commit()
+    return "This image is removed from your collection"
+
+
 @app.route('/bookmark', methods=['POST'])
 def bookmark():
     try:
@@ -101,7 +114,6 @@ def bookmark():
         filename = str(data['path']).split("/")[-1]
         filePath = "./tmp/draw/" + filename
         fsize = os.path.getsize(filePath)/float(1024*1024)
-        # todo bug email is unique, username is not
         user = User.query.filter_by(name=data['user']).first()
         img = Images.query.filter_by(name=filename,userid=user.id).first()
         if not img:
@@ -112,7 +124,6 @@ def bookmark():
         else:
             return "1"
     except:
-        print("2222")
         return "2"
 @app.route('/')
 def hello_world():
@@ -165,12 +176,16 @@ def signupPage():
     if user:
         return "This email was already registered."
     else:
-        new_user = User(name=username, password=password,email=email)
-        db.session.add(new_user)
-        db.session.commit()
-        #保存session
-        mysession['user_username'] = new_user.name
-        return "1"
+        user = User.query.filter_by(name=username).first()
+        if user:
+            return "This username was already registered."
+        else:
+            new_user = User(name=username, password=password,email=email)
+            db.session.add(new_user)
+            db.session.commit()
+            #保存session
+            mysession['user_username'] = new_user.name
+            return "1"
 
 @app.route('/model', methods=['POST'])
 def choose_model():

@@ -13,7 +13,7 @@
 
 
         <a id="login">
-          <span @click="myfunRouter" id="loginText" class="link" style="color:#21B3B9; font-weight: bold; float:right">
+          <span  @click="myfunRouter" id="loginText" class="link" style=" cursor:pointer; color:#21B3B9; font-weight: bold; float:right">
             Log in/Sign up
             
           </span>

@@ -204,7 +204,7 @@
                     }else if(json=="1"){
                       this.$notify({
                         title: "Bookmark failed",
-                        message: "This image had already been marked...",
+                        message: "This image had already been marked or image with the same name had been marked(change the name and try again)...",
                         duration: 2000,
                         type: "error",
                       });

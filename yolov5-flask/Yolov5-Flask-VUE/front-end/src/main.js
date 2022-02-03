@@ -10,7 +10,10 @@ import axios from 'axios'
 import Element from 'element-ui'
 import echarts from "echarts";
 import 'jquery'
+import Viewer from 'v-viewer';
+import 'viewerjs/dist/viewer.css';
 
+Vue.use(Viewer);
 
 
 Vue.prototype.$echarts = echarts;
