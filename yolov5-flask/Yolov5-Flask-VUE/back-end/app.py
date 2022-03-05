@@ -1,4 +1,5 @@
 import datetime
+import time
 import logging as rel_log
 import os
 import shutil
@@ -98,8 +99,6 @@ def validation():
 @app.route('/delete', methods=['POST'])
 def delete():
     data = request.get_json()
-    print(data['username'])
-    print(data['imagename'])
     user = User.query.filter_by(name=data['username']).first()
     img = Images.query.filter_by(name=data['imagename'], userid=user.id).first()
     db.session.delete(img)
@@ -132,13 +131,11 @@ def hello_world():
 @app.route('/images', methods=['POST'])
 def images():
     data = request.get_json()
-    print(data['username'])
     user = User.query.filter_by(name=data['username']).first()
     images = Images.query.filter_by(userid=user.id)
     mydic = []
     for i in images:
         mydic.append(str(i))
-    print(mydic)
     return ''.join(mydic)
 
 
@@ -196,7 +193,6 @@ def choose_model():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     file = request.files['file']
-    print(datetime.datetime.now(), file.filename)
 
     current_app.model.currentModel()
 
@@ -207,9 +203,11 @@ def upload_file():
         image_path = os.path.join('./tmp/ct', file.filename)
 
         # 通过Core main 给定的model来调用ALDetector_pytorch中的detect方法
-
+        t1 = time.perf_counter()
         pid, image_info = core.main.c_main(
             image_path, current_app.model, file.filename.rsplit('.', 1)[1])
+        t2 = time.perf_counter()
+        print(t2-t1)
         return jsonify({'status': 1,
                         'image_url': 'http://127.0.0.1:5003/tmp/ct/' + pid,
                         'draw_url': 'http://127.0.0.1:5003/tmp/draw/' + pid,
