@@ -110,6 +110,8 @@ def delete():
 def bookmark():
     try:
         data = request.get_json()
+        print(data['path'])
+        print(data['num'])
         filename = str(data['path']).split("/")[-1]
         filePath = "./tmp/draw/" + filename
         fsize = os.path.getsize(filePath)/float(1024*1024)
