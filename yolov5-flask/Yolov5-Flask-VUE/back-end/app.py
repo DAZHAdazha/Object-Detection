@@ -64,7 +64,7 @@ class Images(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     userid = db.Column(db.Integer,nullable=True)
     #todo name should be unique
-    name = db.Column(db.String(32),unique=True)
+    name = db.Column(db.String(32))
     size = db.Column(db.String(32))
     objects = db.Column(db.String(32))
     date = db.Column(db.DateTime, nullable=True)
@@ -110,8 +110,6 @@ def delete():
 def bookmark():
     try:
         data = request.get_json()
-        print(data['path'])
-        print(data['num'])
         filename = str(data['path']).split("/")[-1]
         filePath = "./tmp/draw/" + filename
         fsize = os.path.getsize(filePath)/float(1024*1024)
@@ -133,6 +131,7 @@ def hello_world():
 @app.route('/images', methods=['POST'])
 def images():
     data = request.get_json()
+    print(data)
     user = User.query.filter_by(name=data['username']).first()
     images = Images.query.filter_by(userid=user.id)
     mydic = []

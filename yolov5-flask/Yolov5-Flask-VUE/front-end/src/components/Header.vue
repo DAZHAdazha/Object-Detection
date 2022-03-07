@@ -4,7 +4,7 @@
     <div class="top-left-edition">
       <span style="color: #ff7c0b; font-weight: bold">
         <!-- <i class="el-icon-star-off" style="font-size: 23px"></i> -->
-        冯韵嘉
+        Yunjia Feng
       </span>
       <span style="color:#21B3B9; font-weight: bold">
         <!-- <i class="el-icon-search" style="font-size: 23px"></i> -->
