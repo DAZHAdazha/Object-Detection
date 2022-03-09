@@ -14,15 +14,7 @@ import Viewer from 'v-viewer';
 import 'viewerjs/dist/viewer.css';
 
 Vue.use(Viewer);
-
-
 Vue.prototype.$echarts = echarts;
-
-
-
-
-
-
 Vue.use(Element)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -46,8 +38,6 @@ const router = new VueRouter({
     ],
     mode: "history"
 })
-
-// // 全局注册组件
 Vue.component("App", App);
 
 /* eslint-disable no-new */

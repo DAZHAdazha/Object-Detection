@@ -3,23 +3,17 @@
   <div id="Header">
     <div class="top-left-edition">
       <span style="color: #ff7c0b; font-weight: bold">
-        <!-- <i class="el-icon-star-off" style="font-size: 23px"></i> -->
         Yunjia Feng
       </span>
       <span style="color:#21B3B9; font-weight: bold">
-        <!-- <i class="el-icon-search" style="font-size: 23px"></i> -->
         2018110239
       </span>
-
-
-        <a id="login">
-          <span  @click="myfunRouter" id="loginText" class="link" style=" cursor:pointer; color:#21B3B9; font-weight: bold; float:right">
-            Log in/Sign up
-            
-          </span>
-        </a>
-
-
+      <a id="login">
+        <span @click="myfunRouter" id="loginText" class="link"
+          style=" cursor:pointer; color:#21B3B9; font-weight: bold; float:right">
+          Log in/Sign up
+        </span>
+      </a>
     </div>
     <div id="word">
       <h1>{{ msg }}</h1>
@@ -32,35 +26,32 @@
     data() {
       return {
         msg: "Object Detection Yolov5",
-        user:"login",
+        user: "login",
       };
     },
     methods: {
-      myfunRouter: function (){
+      myfunRouter: function () {
         this.$router.push('/' + this.user);
         location.reload();
       },
-    
-  },created () {
 
-          var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-          httpRequest.open('POST', 'http://127.0.0.1:5003/validation', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
-          httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-          httpRequest.send();//发送请求 将json写入send中
-          /**
-           * 获取数据后的处理程序
-           */
-          httpRequest.onreadystatechange = () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
-              if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
-                  var json = httpRequest.responseText;//获取到服务端返回的数据
-                  if(json!='0'){
-                    const sign = document.getElementById('loginText');
-                    sign.innerHTML = json;
-                    this.user = "search";
-                  }
-              }
-          };
-        
+    },
+    created() {
+
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.open('POST', 'http://127.0.0.1:5003/validation', true);
+      httpRequest.setRequestHeader("Content-type", "application/json");
+      httpRequest.send();
+      httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+          var json = httpRequest.responseText;
+          if (json != '0') {
+            const sign = document.getElementById('loginText');
+            sign.innerHTML = json;
+            this.user = "search";
+          }
+        }
+      };
     }
   }
 </script>

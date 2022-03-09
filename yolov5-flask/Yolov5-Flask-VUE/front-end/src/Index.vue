@@ -16,7 +16,7 @@
   import Header from "./components/Header";
   import Footer from "./components/Footer";
   import Content from "./components/Content";
-  
+
 
 
   export default {
@@ -31,7 +31,7 @@
     },
     methods: {},
     mounted() {
-      document.documentElement.style.setProperty('--app-bg','rgb(225, 232, 238)')
+      document.documentElement.style.setProperty('--app-bg', 'rgb(225, 232, 238)')
     }
   };
 </script>

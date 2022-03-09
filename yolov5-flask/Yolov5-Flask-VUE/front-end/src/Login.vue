@@ -1,36 +1,32 @@
 <template>
   <div id="login">
-
     <router-link to="/">
-    <div id="home" style="color:white;position: absolute; top:5em; font-size:70px;margin-left:15%">
-    <i class="el-icon-back"></i>
-    </div>
+      <div id="home" style="color:white;position: absolute; top:5em; font-size:70px;margin-left:15%">
+        <i class="el-icon-back"></i>
+      </div>
     </router-link>
-
     <div class="form-structor" style="margin-left:40%; margin-top:8%">
-    <div class="signup">
-      <h2 style="margin-left:-35px" class="form-title" @click="myfunSignup" id="signup"><span>Or</span>Sign up</h2>
-      <div class="form-holder">
-        <input id="signupUsername" type="text" class="input" placeholder="Username" />
-        <input id="signupEmail" type="email" class="input" placeholder="Email" />
-        <input id="signupPassword" type="password" class="input" placeholder="Password" />
-      </div>
-      <button class="submit-btn" @click="Signup">Sign up</button>
-    </div>
-    <div class="login slide-up">
-      <div class="center">
-        <h2 class="form-title" @click="myfunLogin" id="loginButton"><span>Or</span>Log in</h2>
+      <div class="signup">
+        <h2 style="margin-left:-35px" class="form-title" @click="myfunSignup" id="signup"><span>Or</span>Sign up</h2>
         <div class="form-holder">
-          <input id="loginEmail" type="email" class="input" placeholder="Email" />
-          <input id="loginPassword" type="password" class="input" placeholder="Password" />
+          <input id="signupUsername" type="text" class="input" placeholder="Username" />
+          <input id="signupEmail" type="email" class="input" placeholder="Email" />
+          <input id="signupPassword" type="password" class="input" placeholder="Password" />
         </div>
-        <button class="submit-btn"  @click="Login">Log in</button>
+        <button class="submit-btn" @click="Signup">Sign up</button>
+      </div>
+      <div class="login slide-up">
+        <div class="center">
+          <h2 class="form-title" @click="myfunLogin" id="loginButton"><span>Or</span>Log in</h2>
+          <div class="form-holder">
+            <input id="loginEmail" type="email" class="input" placeholder="Email" />
+            <input id="loginPassword" type="password" class="input" placeholder="Password" />
+          </div>
+          <button class="submit-btn" @click="Login">Log in</button>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-
-
 </template>
 
 
@@ -67,106 +63,98 @@
         });
       },
       Signup: function (event) {
-        
         const signupUsername = document.getElementById('signupUsername').value;
         const signupEmail = document.getElementById('signupEmail').value;
         const signupPassword = document.getElementById('signupPassword').value;
-        if(signupUsername=="" || signupEmail=="" || signupPassword==""){
+        if (signupUsername == "" || signupEmail == "" || signupPassword == "") {
           this.$notify({
-                        title: "Sign up failed",
-                        message: "Please fill up all the inputs!",
-                        duration: 2000,
-                        type: "warning",
-                      });
+            title: "Sign up failed",
+            message: "Please fill up all the inputs!",
+            duration: 2000,
+            type: "warning",
+          });
           event.preventDefault();
         } else {
-          var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-          httpRequest.open('POST', 'http://127.0.0.1:5003/signupPage', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
-          httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-          var obj = { username: signupUsername, email: signupEmail, password: signupPassword };
-          httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
-          /**
-           * 获取数据后的处理程序
-           */
-          httpRequest.onreadystatechange =  () =>{//请求后的回调接口，可将请求成功后要执行的程序写在其中
-              if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
-                  var json = httpRequest.responseText;//获取到服务端返回的数据
-                  if(json=='1'){
-                    this.$notify({
-                        title: "Sign up successfully!",
-                        message: "Sign up successfully!",
-                        duration: 2000,
-                        type: "success",
-                      });
-                  this.$router.push('/search');
-                  } else {
-                    this.$notify({
-                        title: "Sign up failed!",
-                        message: json,
-                        duration: 2000,
-                        type: "warning",
-                      });
-                  }
-                  
+          var httpRequest = new XMLHttpRequest(); 
+          httpRequest.open('POST', 'http://127.0.0.1:5003/signupPage', true); 
+          httpRequest.setRequestHeader("Content-type", "application/json"); 
+          var obj = {
+            username: signupUsername,
+            email: signupEmail,
+            password: signupPassword
+          };
+          httpRequest.send(JSON.stringify(obj)); 
+          httpRequest.onreadystatechange = () => { 
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) { 
+              var json = httpRequest.responseText;
+              if (json == '1') {
+                this.$notify({
+                  title: "Sign up successfully!",
+                  message: "Sign up successfully!",
+                  duration: 2000,
+                  type: "success",
+                });
+                this.$router.push('/search');
+              } else {
+                this.$notify({
+                  title: "Sign up failed!",
+                  message: json,
+                  duration: 2000,
+                  type: "warning",
+                });
               }
+            }
           };
         }
-
-        
       },
       Login: function (event) {
         const loginEmail = document.getElementById('loginEmail').value;
         const loginPassword = document.getElementById('loginPassword').value;
-        if(loginEmail=="" || loginPassword==""){
+        if (loginEmail == "" || loginPassword == "") {
           this.$notify({
-                        title: "Login failed",
-                        message: "Please fill up all the inputs!",
-                        duration: 2000,
-                        type: "warning",
-                      });
+            title: "Login failed",
+            message: "Please fill up all the inputs!",
+            duration: 2000,
+            type: "warning",
+          });
           event.preventDefault();
         } else {
-          var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-          httpRequest.open('POST', 'http://127.0.0.1:5003/loginPage', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
-          httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-          var obj = { email: loginEmail, password: loginPassword };
-          httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
-          /**
-           * 获取数据后的处理程序
-           */
-          httpRequest.onreadystatechange = () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
-              if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
-                  var json = httpRequest.responseText;//获取到服务端返回的数据
-                  if(json=='1'){
-                    this.$notify({
-                        title: "Log in successfully!",
-                        message: "Log in successfully!",
-                        duration: 2000,
-                        type: "success",
-                      });
-                  this.$router.push('/search');
-                  } else if(json=='0'){
-                    this.$notify({
-                        title: "Log in failed!",
-                        message: "Wrong password",
-                        duration: 2000,
-                        type: "error",
-                      });
-                  } else if (json=='2'){
-                      this.$notify({
-                        title: "Log in failed!",
-                        message: "Can not find this account",
-                        duration: 2000,
-                        type: "warning",
-                      });
-
-                  }
-                  
-          
-              }
+          var httpRequest = new XMLHttpRequest(); 
+          httpRequest.open('POST', 'http://127.0.0.1:5003/loginPage', true); 
+          httpRequest.setRequestHeader("Content-type", "application/json"); 
+          var obj = {
+            email: loginEmail,
+            password: loginPassword
           };
-
-
+          httpRequest.send(JSON.stringify(obj));
+          httpRequest.onreadystatechange = () => {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+              var json = httpRequest.responseText; 
+              if (json == '1') {
+                this.$notify({
+                  title: "Log in successfully!",
+                  message: "Log in successfully!",
+                  duration: 2000,
+                  type: "success",
+                });
+                this.$router.push('/search');
+              } else if (json == '0') {
+                this.$notify({
+                  title: "Log in failed!",
+                  message: "Wrong password",
+                  duration: 2000,
+                  type: "error",
+                });
+              } else if (json == '2') {
+                this.$notify({
+                  title: "Log in failed!",
+                  message: "Can not find this account",
+                  duration: 2000,
+                  type: "warning",
+                });
+              }
+            }
+          };
         }
       },
     },
@@ -176,7 +164,7 @@
 <style scoped>
   html,
   body {
-    position: relative ;
+    position: relative;
     min-height: 100vh;
     background-color: #E1E8EE;
     display: flex;
@@ -453,5 +441,4 @@
     transform: scale(1.1);
     cursor: pointer;
   }
-
 </style>

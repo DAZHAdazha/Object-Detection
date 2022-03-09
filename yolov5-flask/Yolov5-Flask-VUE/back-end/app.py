@@ -8,9 +8,6 @@ from flask import *
 from processor.AIDetector_pytorch import Detector
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-
-
-
 import core.main
 
 UPLOAD_FOLDER = r'./uploads'
@@ -22,16 +19,15 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 mysession = {}
 
-# 配置mysql
+# mysql configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:fengyunjia@127.0.0.1:3306/object_detection'  # mysql://username:password@hostname/database
-# 是否动态修改 如为True 则会消耗性能 且改接口以后会被弃用 不建议开启
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 werkzeug_logger = rel_log.getLogger('werkzeug')
 werkzeug_logger.setLevel(rel_log.ERROR)
 
-# 解决缓存刷新问题
+# solve cache refresh problem
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 
 
@@ -47,11 +43,11 @@ class User(db.Model):
         password = kwargs.get('password')
         email = kwargs.get('email')
         self.name = name
-        # 加密密码，注意需要导入
+        #SHA-256 encryption
         self.password = generate_password_hash(password)
         self.email = email
 
-    # 检查密码函数
+    # check for password encryption
     def check_password(self, raw_password):
         result = check_password_hash(self.password, raw_password)
         return result
@@ -63,17 +59,15 @@ class Images(db.Model):
     __tablename__ = 'images'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     userid = db.Column(db.Integer,nullable=True)
-    #todo name should be unique
     name = db.Column(db.String(32))
     size = db.Column(db.String(32))
     objects = db.Column(db.String(32))
     date = db.Column(db.DateTime, nullable=True)
-
     def __repr__(self):
         return '<%s %s %s %s %s>' % (self.id, self.name, self.size, self.objects, self.date)
 
 
-# 添加header解决跨域
+# add header to solve CSRF
 @app.after_request
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -86,6 +80,7 @@ def after_request(response):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+
 @app.route('/validation', methods=['POST'])
 def validation():
     try:
@@ -95,6 +90,7 @@ def validation():
             return "0"
     except:
         pass
+
 
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -124,9 +120,12 @@ def bookmark():
             return "1"
     except:
         return "2"
+
+
 @app.route('/')
 def hello_world():
     return redirect(url_for('static', filename='./index.html'))
+
 
 @app.route('/images', methods=['POST'])
 def images():
@@ -164,6 +163,7 @@ def loginPage():
     else:
         return "2"
 
+
 @app.route('/signupPage', methods=['POST'])
 def signupPage():
     data = request.get_json()
@@ -181,9 +181,10 @@ def signupPage():
             new_user = User(name=username, password=password,email=email)
             db.session.add(new_user)
             db.session.commit()
-            #保存session
+            #save session
             mysession['user_username'] = new_user.name
             return "1"
+
 
 @app.route('/model', methods=['POST'])
 def choose_model():
@@ -191,19 +192,18 @@ def choose_model():
         current_app.model.changeModel(str(i))
     return "ok"
 
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     file = request.files['file']
-
     current_app.model.currentModel()
-
     if file and allowed_file(file.filename):
         src_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(src_path)
         shutil.copy(src_path, './tmp/ct')
         image_path = os.path.join('./tmp/ct', file.filename)
 
-        # 通过Core main 给定的model来调用ALDetector_pytorch中的detect方法
+        # use model in Core main to call detect function in ALDetector_pytorch
         t1 = time.perf_counter()
         pid, image_info = core.main.c_main(
             image_path, current_app.model, file.filename.rsplit('.', 1)[1])
@@ -219,7 +219,7 @@ def upload_file():
 
 @app.route("/download", methods=['GET'])
 def download_file():
-    # 需要知道2个参数, 第1个参数是本地目录的path, 第2个参数是文件名(带扩展名)
+    # require 2 arguments, local directory path and file name with extension
     return send_from_directory('data', 'testfile.zip', as_attachment=True)
 
 
@@ -245,14 +245,14 @@ if __name__ == '__main__':
     with app.app_context():
         current_app.model = Detector()
 
-    # # 删除表
+    # # delete all tables
     # db.drop_all()
-    # # 创建表
+    # # create all tables
     # db.create_all()
-    # # 生成数据
+    # # generate data
     # u1 = User(name='dazha', password='fengyunjia',email='758@qq.com')
     # db.session.add(u1)
-    # # 提交会话
+    # # submit session
     # db.session.commit()
 
 

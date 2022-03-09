@@ -1,5 +1,5 @@
 <template>
-  <div id="Content" >
+  <div id="Content">
     <el-dialog title="AI is detecting" :visible.sync="dialogTableVisible" :show-close="false"
       :close-on-press-escape="false" :append-to-body="true" :close-on-click-modal="false" :center="true">
       <el-progress :percentage="percentage"></el-progress>
@@ -9,7 +9,7 @@
     <div style="background-color:#e1e8ee">
       <el-dropdown @command="handleCommand">
         <div class="el-dropdown-link link" style="margin-left:20px;  color:#21B3B9; font-size:18px;font-weight: bold">
-           Select weight<i class="el-icon-arrow-down el-icon--right"></i>
+          Select weight<i class="el-icon-arrow-down el-icon--right"></i>
         </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="s">yolov5s</el-dropdown-item>
@@ -19,10 +19,8 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-
+    
     <div id="CT" style="background-color:#e1e8ee">
-
-
       <div id="CT_image">
         <el-card id="CT_image_1" class="box-card" style="
             border-radius: 8px;
@@ -30,7 +28,6 @@
             height: 360px;
             margin-bottom: -30px;
           ">
-
           <div class="demo-image__preview1">
             <div v-loading="loading" element-loading-text="uploading images" element-loading-spinner="el-icon-loading">
               <el-image :src="url_1" class="image_1" :preview-src-list="srcList" style="border-radius: 3px 3px 0 0">
@@ -41,14 +38,10 @@
                       Upload image
                       <input ref="upload" style="display: none" name="file" type="file" @change="update" />
                     </el-button>
-
-
                   </div>
                 </div>
               </el-image>
             </div>
-
-
             <div class="img_info_1" style="border-radius: 0 0 5px 5px">
               <span style="color: white; letter-spacing: 0px">Raw image</span>
             </div>
@@ -83,8 +76,6 @@
               class="download_bt" v-on:click="bookmark">
               Bookmark image
             </el-button>
-
-
           </div>
           <el-tabs v-model="activeName">
             <el-tab-pane label="Detected Objects" name="first">
@@ -145,7 +136,7 @@
         showbutton: true,
         percentage: 0,
         fullscreenLoading: false,
-        image_num:0,
+        image_num: 0,
         opacitys: {
           opacity: 0,
         },
@@ -173,66 +164,67 @@
       bookmark() {
         const sign = document.getElementById('loginText').innerText;
         // todo fixed
-        if(sign=="Log in/Sign up"){
+        if (sign == "Log in/Sign up") {
           this.$notify({
-          title: "Bookmark failed",
-          message: "Please log in first!",
-          duration: 2000,
-          type: "warning",
-        });
+            title: "Bookmark failed",
+            message: "Please log in first!",
+            duration: 2000,
+            type: "warning",
+          });
         } else {
-            var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-            httpRequest.open('POST', 'http://127.0.0.1:5003/bookmark', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */
-            httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-            var obj = { path:this.url_2,user:sign,num:this.image_num};
-            httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
-            /**
-             * 获取数据后的处理程序
-             */
-            httpRequest.onreadystatechange = () => {//请求后的回调接口，可将请求成功后要执行的程序写在其中
-                if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
-                    var json = httpRequest.responseText;//获取到服务端返回的数据
-                    
-                      if(sign!="Log in/Sign up"){
-                        if(json=="0"){
-                        this.$notify({
-                        title: "Bookmark success",
-                        message: "Bookmark this image successfully",
-                        duration: 2000,
-                        type: "success",
-                      });
-                    }else if(json=="1"){
-                      this.$notify({
-                        title: "Bookmark failed",
-                        message: "This image had already been marked or image with the same name had been marked(change the name and try again)...",
-                        duration: 2000,
-                        type: "error",
-                      });
-                    } else {
-                      this.$notify({
-                        title: "Bookmark failed",
-                        message: "something wrong...",
-                        duration: 2000,
-                        type: "error",
-                      });
-                    }
+          var httpRequest = new XMLHttpRequest();
+          httpRequest.open('POST', 'http://127.0.0.1:5003/bookmark', true);
+          httpRequest.setRequestHeader("Content-type", "application/json");
+          var obj = {
+            path: this.url_2,
+            user: sign,
+            num: this.image_num
+          };
+          httpRequest.send(JSON.stringify(obj));
+          httpRequest.onreadystatechange = () => {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+              var json = httpRequest.responseText;
+
+              if (sign != "Log in/Sign up") {
+                if (json == "0") {
+                  this.$notify({
+                    title: "Bookmark success",
+                    message: "Bookmark this image successfully",
+                    duration: 2000,
+                    type: "success",
+                  });
+                } else if (json == "1") {
+                  this.$notify({
+                    title: "Bookmark failed",
+                    message: "This image had already been marked or image with the same name had been marked(change the name and try again)...",
+                    duration: 2000,
+                    type: "error",
+                  });
                 } else {
                   this.$notify({
-                        title: "Bookmark failed",
-                        message: "Please log in to use bookmark",
-                        duration: 2000,
-                        type: "error",
-                      });
+                    title: "Bookmark failed",
+                    message: "something wrong...",
+                    duration: 2000,
+                    type: "error",
+                  });
                 }
+              } else {
+                this.$notify({
+                  title: "Bookmark failed",
+                  message: "Please log in to use bookmark",
+                  duration: 2000,
+                  type: "error",
+                });
+              }
             }
           }
-        
+
         }
       },
       next() {
         this.active++;
       },
-      // 获得目标文件
+      //get target file
       getObjectURL(file) {
         var url = null;
         if (window.createObjcectURL != undefined) {
@@ -244,7 +236,7 @@
         }
         return url;
       },
-      // 上传文件
+      // upload file
       update(e) {
         this.percentage = 0;
         this.dialogTableVisible = true;
@@ -261,8 +253,8 @@
         this.showbutton = false;
         let file = e.target.files[0];
         this.url_1 = this.$options.methods.getObjectURL(file);
-        let param = new FormData(); //创建form对象
-        param.append("file", file, file.name); //通过append向form对象添加数据
+        let param = new FormData(); //create form object
+        param.append("file", file, file.name); //append data to form object
         var timer = setInterval(() => {
           this.myFunc();
         }, 30);
@@ -270,7 +262,7 @@
           headers: {
             "Content-Type": "multipart/form-data"
           },
-        }; //添加请求头
+        }; //append header information
         axios
           .post(this.server_url + "/upload", param, config)
           .then((response) => {
@@ -322,8 +314,6 @@
 
 
 <style scoped>
-
-
   .el-button {
     padding: 12px 20px !important;
   }
@@ -517,7 +507,6 @@
     -ms-opacity: 0;
     -webkit-opacity: 0;
     opacity: 0;
-    /*css属性&mdash;&mdash;opcity不透明度，取值0-1*/
     filter: alpha(opacity=0);
     cursor: pointer;
   }
