@@ -16,7 +16,6 @@
 
 [https://github.com/Sharpiless/Yolov5-Flask-VUE](https://github.com/Sharpiless/Yolov5-Flask-VUE)
 
-
 # 2. YOLOv5模型训练：
 
 训练自己的数据集可以看我这篇博客：
@@ -125,7 +124,6 @@ class Detector(object):
         return im, image_info
 ```
 
-
 处理完保存到服务器本地临时的目录下：
 
 ```python
@@ -134,7 +132,6 @@ import os
 def pre_process(data_path):
     file_name = os.path.split(data_path)[1].split('.')[0]
     return data_path, file_name
-
 ```
 
 ```python
@@ -165,10 +162,10 @@ def c_main(path, model, ext):
 
 if __name__ == '__main__':
     pass
-
 ```
 
 # 4. Flask 部署：
+
 然后通过Flask框架写相应函数：
 
 ```python
@@ -189,17 +186,18 @@ def upload_file():
                         'image_info': image_info})
 
     return jsonify({'status': 0})
-
 ```
+
 这样前端发出POST请求时，会对上传的图像进行处理。
 
 # 5. VUE前端：
+
 主要是通过VUE编写前端WEB框架。
 
 核心前后端交互代码：
 
 ```html
-	// 上传文件
+    // 上传文件
     update(e) {
       this.percentage = 0;
       this.dialogTableVisible = true;
@@ -251,15 +249,16 @@ def upload_file():
         });
     },
 ```
+
 这段代码在点击提交图片时响应：
 
 ```html
-		<div slot="header" class="clearfix">
+        <div slot="header" class="clearfix">
             <span>检测目标</span>
             <el-button
               style="margin-left: 35px"
               v-show="!showbutton"
-              type="primary"	
+              type="primary"    
               icon="el-icon-upload"
               class="download_bt"
               v-on:click="true_upload2"
@@ -275,6 +274,7 @@ def upload_file():
             </el-button>
           </div>
 ```
+
 # 6. 启动项目：
 
 在 Flask 后端项目下启动后端代码：
