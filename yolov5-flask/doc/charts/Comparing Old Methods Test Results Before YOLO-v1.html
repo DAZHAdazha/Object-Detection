@@ -1,0 +1,134 @@
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=bar-y-category
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body style="height: 100%; margin: 0">
+        <div id="container" style="height: 100%"></div>
+
+        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/echarts.min.js"></script>
+        <!-- Uncomment this line if you want to dataTool extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/extension/dataTool.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use gl extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to echarts-stat extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use map
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/map/js/china.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/map/js/world.js"></script>
+        -->
+        <!-- Uncomment these two lines if you want to use bmap extension
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@{{version}}/dist/extension/bmap.min.js"></script>
+        -->
+
+        <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option;
+
+
+
+option = {
+  title: {
+    text: 'Comparing Old Methods Test Results Before YOLO-v1'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.01],
+
+  },
+  yAxis: {
+    inverse:true,
+    type: 'category',
+    data: [
+      'This Project',
+      'INRIA_Genetic',
+      'INRIA_Flat',
+      'XRCE',
+      'TKK',
+      'QMUL_LSPCH',
+      'QMUL_HSLS',
+      'UVA_FuseAll',
+      'INRIA_Larlus',
+      'UVA_SFS',
+      'UVA_MCIP',
+      'MPI_BOW',
+      'Tsinghua',
+      'ToshCam_rdf',
+      'UVA_WGT',
+      'UVA_Bigrams',
+      'ToshCam_sv',
+      'PRIPUVA'
+    ]
+  },
+  series: [
+    {
+      type: 'bar',
+      data: [
+        {
+          value: 74.7,
+          itemStyle: {
+            color: 'green'
+          }
+        },
+        57.5,
+        55.8,
+        52.7,
+        50.55,
+        49.3,
+        48.9,
+        44.8,
+        44.4,
+        44.2,
+        42.9,
+        40.6,
+        39.8,
+        35.3,
+        34.8,
+        32.3,
+        32.1,
+        21.1
+      ],
+      itemStyle: {
+       normal: {
+         color: "#3C76F4",       //改变折线点的颜色
+         label : {show: true},   //顶部显示数值
+
+       }
+     },
+    }
+  ]
+};
+
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+        </script>
+    </body>
+</html>
+    
