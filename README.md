@@ -1,5 +1,7 @@
 # Result Preview (demo)
+
 ![images](https://github.com/DAZHAdazha/Object-Detection/blob/main/images/demo.png)
+
 # 1.Objectives & Significance
 
 Object detection has always been of great significance in the field of computer vision whose main objective is to enable the computer to accurately classify the objects in a given picture or video and find the position of each object. In recent years, many computer vision researchers at home and abroad have developed a large number of excellent object detection neural network algorithms, including Faster R-CNN, SSD, YOLO. The goal of this project is to select appropriate object detection algorithms and data sets and train the deep learning model, then develop a website for users which allows users to complete object detection tasks easily.  
@@ -26,11 +28,7 @@ Additionally, SSD adopts VGG16 as the basic model, and then adds a convolution l
 
 (2) Faster R-CNN, after the evolvement of R-CNN and Fast R-CNN, Ross B. Girshick proposed Faster R-CNN in 2016. In terms of structure, the Faster R-CNN integrated feature extraction, bounding box regression (rect refine), and classification into one network, which greatly improves the overall performance, especially in the detection speed.
 
- 
-
 Yolo, stands for You Only Look Once, which adopts a separate CNN model to achieve end-to-end object detection. The input image is resized and sent to the CNN network, then the detected object results are obtained by processing network prediction. Compared with the R-CNN algorithm, it is a unified framework with faster speed while the training process of Yolo is also end-to-end. 
-
- 
 
 In general, object detection is an active research direction in the field of computer vision. Although one-stage detection algorithm and two-stage detection algorithm have achieved good results, there is still a great potential for promotion for application in real scenes, and this is also a meaningful and challenging topic for now and future.
 
@@ -58,15 +56,13 @@ For the web page implementation, choices of front-end and back-end frameworks (V
 
 Finally, a paper should be constructed by incorporating the research work including background research, literature in the area and related work, objectives, experiment methods, evaluation, conclusion, reference. The language of the paper should be clear and structural, logically explaining the process of the detailed project, in company with suitable figures, graphs, and tables.
 
- # 4. Technique Stack
+# 4. Technique Stack
 
 The research approach in this project is divided into two parts: deep learning module and web page module.
 
 In the deep learning module, this project will take into consideration using the state of art object detection algorithm Yolo-v5 as the basis, implemented by Pytorch, as the main component. After implementation of the code that used to transform the dataset into a suitable format, four different pre-trained models (s-small, m-medium, l-large, x-extra) will be trained separately with the dataset VOC 2007 for epochs, evaluation graphs will be made based on dataset benchmark and important indicators: accuracy, average precision, recall, processing speed.
 
 In the web page module, the front-end part will use Vue as front-end skeleton, displaying the representation layer for the user to upload image or video and download results, while Python Flask will be adopted as back-end routers which will call deep learning module to process image or video for object detection tasks.
-
-
 
 # 5. Proposal Deliverable
 
@@ -77,8 +73,6 @@ The deep learning module should include Pytorch based Yolo-v5 algorithm implemen
 The web module will contain both front-end and back-end parts. The front-end page will be implemented based on the Vue framework, providing interaction for users to upload images or videos and download object detection results. While the back-end will provide processing routers to call deep learning API, and also record corresponding logs during each process (time, process speed, size).
 
 Additionally, a paper will be constructed as a deliverable of this project, which including the background research, literature in the area and related work, objectives, experiment methods, evaluation, conclusion, reference, in order to demonstrate the whole process and experient details during the project.
-
- 
 
 # 6. Plan
 
@@ -171,4 +165,3 @@ Additionally, a paper will be constructed as a deliverable of this project, whic
  (2) Prepare for the Thesis Defense presentation.
 
  (3) Consider the advantages and disadvantages of the project, and prepare incoming questions in the defense. 
-
