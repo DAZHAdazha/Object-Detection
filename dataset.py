@@ -4,8 +4,7 @@ import os
 from os import listdir, getcwd
 from os.path import join
 
-# 这里就体现出来了咱们在1.2步骤的时候我说的尽量按照那个目录名进行操作的优势，
-# 在这可以剩下很多去修改名称的精力
+
 # sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
 sets = [('2007', 'train'), ('2007', 'val'), ('2007', 'test')]  # 我只用了VOC2007
 
@@ -15,11 +14,11 @@ classes = ["aeroplane", "bicycle", "bird", "boat", "bottle",
            "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
 
 
-# classes = ["face"]  # 修改为自己的label
+# classes = ["face"]  
 
 def convert(size, box):
-    dw = 1. / (size[0])  # 有的人运行这个脚本可能报错，说不能除以0什么的，你可以变成dw = 1./((size[0])+0.1)
-    dh = 1. / (size[1])  # 有的人运行这个脚本可能报错，说不能除以0什么的，你可以变成dh = 1./((size[0])+0.1)
+    dw = 1. / (size[0])  
+    dh = 1. / (size[1])  
     x = (box[0] + box[1]) / 2.0 - 1
     y = (box[2] + box[3]) / 2.0 - 1
     w = box[1] - box[0]
@@ -65,6 +64,5 @@ for year, image_set in sets:
         convert_annotation(year, image_id)
     list_file.close()
 
-# 这块是路径拼接，暂时用不上，先都注释了
 # os.system("cat 2007_train.txt 2007_val.txt 2012_train.txt 2012_val.txt > train.txt")
 # os.system("cat 2007_train.txt 2007_val.txt 2007_test.txt 2012_train.txt 2012_val.txt > train.all.txt")
